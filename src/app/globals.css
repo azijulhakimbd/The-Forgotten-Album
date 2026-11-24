@@ -7,13 +7,13 @@
     --font-geist-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-    --bg-primary: #F4EBDD;       /* Vintage Cream */
-    --bg-secondary: #E9DFC9;     /* Parchment */
-    --bg-card: #FAF5ED;          /* Light Card */
+    --bg-primary: #efefef;       /* Clean Light */
+    --bg-secondary: #e4e4e4;     /* Slightly Deeper Light */
+    --bg-card: #f7f7f7;          /* Light Card */
     --text-primary: #12110F;     /* Archive Black */
     --text-secondary: #796044;   /* Sepia Brown */
-    --text-muted: #8C8275;       /* Muted Brown */
-    --border-color: #D6C8AF;     /* Soft Paper Border */
+    --text-muted: #7a7570;       /* Muted Brown */
+    --border-color: #d0cdc8;     /* Soft Border */
     --accent-gold: #B89255;      /* Antique Gold for light mode */
     --accent-gold-hover: #9E7A3E;
     --film-grain-opacity: 0.035;

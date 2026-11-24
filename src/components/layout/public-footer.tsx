@@ -2,7 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowUp, Heart, Mail, ExternalLink } from "lucide-react";
+import { ArrowUp, ExternalLink } from "lucide-react";
+import { PwaInstallButton } from "@/components/layout/pwa-install-button";
 
 export function PublicFooter() {
   const scrollToTop = () => {

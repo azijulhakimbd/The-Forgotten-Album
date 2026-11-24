@@ -63,8 +63,8 @@ function LoginForm() {
         </p>
       </div>
 
-      {/* Demo Shortcut Card */}
-      <div className="p-3.5 rounded-lg border border-amber-600/30 bg-amber-500/10 text-xs space-y-2">
+      {/* //*  Demo Shortcut Card  */}
+      {/* <div className="p-3.5 rounded-lg border border-amber-600/30 bg-amber-500/10 text-xs space-y-2">
         <div className="flex items-center justify-between">
           <span className="font-mono text-[10px] uppercase font-bold text-amber-700 dark:text-amber-300">
             Demo Curator Credentials
@@ -80,7 +80,7 @@ function LoginForm() {
         <p className="font-mono text-[11px] text-[var(--text-muted)] truncate">
           curator@theforgottenalbum.org • AdminPass123!
         </p>
-      </div>
+      </div> */}
 
       {error && (
         <div className="flex items-center gap-2 p-3 rounded-lg border border-rose-600/40 bg-rose-500/10 text-rose-500 text-xs">
