@@ -17,8 +17,15 @@ export function PublicFooter() {
           {/* Brand & Mission Statement */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded border border-amber-600/40 bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-400 font-display font-bold text-lg">
-                FA
+              <div className="w-9 h-9 rounded overflow-hidden border border-amber-600/40 flex-shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/The Forgotten Album Emblem.png"
+                  alt="The Forgotten Album Emblem"
+                  width={36}
+                  height={36}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <span className="font-display text-xl font-bold tracking-tight">
                 THE FORGOTTEN ALBUM

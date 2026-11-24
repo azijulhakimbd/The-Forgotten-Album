@@ -50,8 +50,15 @@ export function PublicNavbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Logo & Wordmark */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded border border-amber-600/40 bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-400 group-hover:border-amber-500 group-hover:bg-amber-500/20 transition-all duration-300">
-            <span className="font-display text-xl font-bold tracking-tighter">FA</span>
+          <div className="w-10 h-10 rounded overflow-hidden border border-amber-600/40 group-hover:border-amber-500 transition-all duration-300 flex-shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/The Forgotten Album Emblem.png"
+              alt="The Forgotten Album Emblem"
+              width={40}
+              height={40}
+              className="w-full h-full object-cover"
+            />
           </div>
           <div className="flex flex-col">
             <span className="font-display text-lg sm:text-xl font-bold tracking-tight text-[var(--text-primary)] group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">

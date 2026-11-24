@@ -1,10 +1,19 @@
 import React, { Suspense } from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { SearchProvider } from "@/components/layout/search-dialog";
 import { PublicNavbar } from "@/components/layout/public-navbar";
 import { PublicFooter } from "@/components/layout/public-footer";
+import { ServiceWorkerRegistration } from "@/components/layout/service-worker-registration";
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)",  color: "#12110F" },
+    { media: "(prefers-color-scheme: light)", color: "#F4EBDD" },
+  ],
+  colorScheme: "dark light",
+};
 
 export const metadata: Metadata = {
   title: {
@@ -22,11 +31,45 @@ export const metadata: Metadata = {
     "rare photos",
   ],
   authors: [{ name: "The Forgotten Album Curatorial Team" }],
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "The Forgotten Album",
+    startupImage: "/icons/apple-touch-icon.png",
+  },
+  icons: {
+    icon: [
+      { url: "/icons/icon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/icons/icon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/icon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/icons/icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/icons/icon-32x32.png",
+  },
   openGraph: {
     title: "The Forgotten Album — Historical Photography & Storytelling",
     description: "Preserve history, uncover forgotten stories, and bring the past closer through photography.",
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "The Forgotten Album — Historical Photography Archive",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Forgotten Album — Historical Photography & Storytelling",
+    description: "Preserve history, uncover forgotten stories, and bring the past closer through photography.",
+    images: ["/images/og-image.png"],
   },
 };
 
@@ -51,6 +94,7 @@ export default function RootLayout({
             <PublicFooter />
           </SearchProvider>
         </ThemeProvider>
+        <ServiceWorkerRegistration />
       </body>
     </html>
   );
