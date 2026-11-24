@@ -148,8 +148,20 @@ export function PublicFooter() {
 
         {/* Bottom Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-[var(--text-muted)] gap-4">
-          <div className="flex items-center gap-1">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <span>© 2026 The Forgotten Album Archive. All archival rights & attributions documented.</span>
+            <span className="hidden sm:inline text-[var(--border-color)]">·</span>
+            <span className="font-mono">
+              Crafted by{" "}
+              <a
+                href="https://azijul.pro.bd"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-amber-600 dark:text-amber-400 hover:text-amber-500 transition-colors"
+              >
+                azijul.pro.bd
+              </a>
+            </span>
           </div>
           <div className="flex items-center gap-6">
             <Link href="/sources" className="hover:text-amber-500 transition-colors flex items-center gap-1">
