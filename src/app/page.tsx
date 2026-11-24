@@ -16,6 +16,7 @@ import { EraCard } from "@/components/content/era-card";
 import { PersonalityCard } from "@/components/content/personality-card";
 import { CollectionCard } from "@/components/content/collection-card";
 import { NewsletterForm } from "@/components/forms/newsletter-form";
+import { generateOrganizationSchema } from "@/lib/seo/json-ld";
 import {
   ArrowRight,
   Compass,
@@ -55,9 +56,14 @@ export default async function HomePage() {
   // Lead story
   const leadStory = storyData.stories[0] || null;
   const recentStories = storyData.stories.slice(1, 4);
+  const orgJsonLd = generateOrganizationSchema();
 
   return (
     <div className="flex flex-col w-full space-y-24 sm:space-y-32">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+      />
       {/* 5B. Cinematic Hero Section */}
       <section className="relative w-full min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden border-b border-[var(--border-color)]">
         {/* Full-width Background Historical Photograph with parallax style */}

@@ -6,6 +6,7 @@ import { getStoryBySlug, getRelatedStories, getStories } from "@/lib/data";
 import { StoryCard } from "@/components/stories/story-card";
 import { ShareButtons } from "@/components/archive/share-buttons";
 import { formatDate } from "@/lib/utils";
+import { generateStorySchema } from "@/lib/seo/json-ld";
 import {
   Calendar,
   Clock,
@@ -55,9 +56,14 @@ export default async function StoryDetailPage({ params }: StoryDetailPageProps) 
   const currentIndex = allStories.findIndex((s) => s.id === story.id);
   const prevStory = currentIndex > 0 ? allStories[currentIndex - 1] : null;
   const nextStory = currentIndex >= 0 && currentIndex < allStories.length - 1 ? allStories[currentIndex + 1] : null;
+  const storyJsonLd = generateStorySchema(story);
 
   return (
     <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(storyJsonLd) }}
+      />
       {/* Top Breadcrumbs & Previous/Next Navigation */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[var(--border-color)]">
         <nav className="flex items-center gap-2 text-xs font-mono text-[var(--text-muted)]">

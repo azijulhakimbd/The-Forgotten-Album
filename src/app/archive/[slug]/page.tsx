@@ -14,6 +14,7 @@ import { PhotoViewer } from "@/components/archive/photo-viewer";
 import { PhotoCard } from "@/components/archive/photo-card";
 import { StoryCard } from "@/components/stories/story-card";
 import { ShareButtons } from "@/components/archive/share-buttons";
+import { generatePhotoSchema } from "@/lib/seo/json-ld";
 import {
   Calendar,
   MapPin,
@@ -66,9 +67,14 @@ export default async function PhotoDetailPage({ params }: PhotoDetailPageProps) 
   const currentIndex = allPhotos.findIndex((p) => p.id === photo.id);
   const prevPhoto = currentIndex > 0 ? allPhotos[currentIndex - 1] : null;
   const nextPhoto = currentIndex >= 0 && currentIndex < allPhotos.length - 1 ? allPhotos[currentIndex + 1] : null;
+  const photoJsonLd = generatePhotoSchema(photo);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(photoJsonLd) }}
+      />
       {/* Top Breadcrumb & Next/Prev Navigation */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[var(--border-color)]">
         <nav className="flex items-center gap-2 text-xs font-mono text-[var(--text-muted)]">
