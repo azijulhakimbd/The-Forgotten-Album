@@ -131,13 +131,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 🔑 Curator Demo Access Credentials
 
-To test the Admin CMS immediately:
-- **URL**: [http://localhost:3000/login](http://localhost:3000/login)
-- **Email**: `curator@theforgottenalbum.org`
-- **Password**: `AdminPass123!`
-- *(A one-click "Autofill Form" button is provided on the login page for convenience).*
 
 ---
 
