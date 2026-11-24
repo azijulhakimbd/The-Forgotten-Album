@@ -32,6 +32,11 @@ interface PhotoDetailPageProps {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateStaticParams() {
+  const { photos } = await getPhotos({ limit: 100 });
+  return photos.map((p) => ({ slug: p.slug }));
+}
+
 export async function generateMetadata({ params }: PhotoDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
   const photo = await getPhotoBySlug(slug);

@@ -149,7 +149,7 @@ export function PublicFooter() {
         {/* Bottom Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-[var(--text-muted)] gap-4">
           <div className="flex items-center gap-1">
-            <span>© {new Date().getFullYear()} The Forgotten Album Archive. All archival rights & attributions documented.</span>
+            <span>© 2026 The Forgotten Album Archive. All archival rights & attributions documented.</span>
           </div>
           <div className="flex items-center gap-6">
             <Link href="/sources" className="hover:text-amber-500 transition-colors flex items-center gap-1">

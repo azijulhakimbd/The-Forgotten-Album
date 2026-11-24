@@ -2,13 +2,18 @@ import React from "react";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
-import { getPlaceBySlug, getPhotos, getStories } from "@/lib/data";
+import { getPlaceBySlug, getPlaces, getPhotos, getStories } from "@/lib/data";
 import { PhotoCard } from "@/components/archive/photo-card";
 import { StoryCard } from "@/components/stories/story-card";
 import { ArrowLeft, MapPin, Layers, BookOpen, Compass } from "lucide-react";
 
 interface PlaceDetailPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const places = await getPlaces();
+  return places.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PlaceDetailPageProps): Promise<Metadata> {

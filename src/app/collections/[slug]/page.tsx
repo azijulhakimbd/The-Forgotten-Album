@@ -2,12 +2,17 @@ import React from "react";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
-import { getCollectionBySlug, getPhotos } from "@/lib/data";
+import { getCollectionBySlug, getCollections, getPhotos } from "@/lib/data";
 import { PhotoCard } from "@/components/archive/photo-card";
 import { ArrowLeft, Layers, ShieldCheck } from "lucide-react";
 
 interface CollectionDetailPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const collections = await getCollections();
+  return collections.map((c) => ({ slug: c.slug }));
 }
 
 export async function generateMetadata({ params }: CollectionDetailPageProps): Promise<Metadata> {

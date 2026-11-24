@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { MessageSquare, Check, X, ShieldAlert } from "lucide-react";
 

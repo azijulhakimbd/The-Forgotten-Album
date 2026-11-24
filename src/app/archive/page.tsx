@@ -59,7 +59,9 @@ export default async function ArchivePage({ searchParams }: ArchivePageProps) {
       </div>
 
       {/* Filter and Search Controls */}
-      <PhotoFilters categories={categories} eras={eras} />
+      <React.Suspense fallback={<div className="h-16 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] animate-pulse" />}>
+        <PhotoFilters categories={categories} eras={eras} />
+      </React.Suspense>
 
       {/* Photo Gallery Grid */}
       {photos.length === 0 ? (

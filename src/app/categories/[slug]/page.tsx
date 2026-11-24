@@ -2,13 +2,18 @@ import React from "react";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
-import { getCategoryBySlug, getPhotos, getStories } from "@/lib/data";
+import { getCategoryBySlug, getCategories, getPhotos, getStories } from "@/lib/data";
 import { PhotoCard } from "@/components/archive/photo-card";
 import { StoryCard } from "@/components/stories/story-card";
 import { ArrowLeft, BookOpen, Layers } from "lucide-react";
 
 interface CategoryDetailPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const categories = await getCategories();
+  return categories.map((c) => ({ slug: c.slug }));
 }
 
 export async function generateMetadata({ params }: CategoryDetailPageProps): Promise<Metadata> {

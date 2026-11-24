@@ -26,6 +26,10 @@ export function PublicNavbar() {
     setMobileMenuOpen(false);
   }, [pathname]);
 
+  if (pathname && pathname.startsWith("/admin")) {
+    return null;
+  }
+
   const navLinks = [
     { label: "Archive", href: "/archive", icon: Landmark },
     { label: "Stories", href: "/stories", icon: BookOpen },

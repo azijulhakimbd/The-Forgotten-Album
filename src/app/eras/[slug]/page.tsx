@@ -2,7 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
-import { getEraBySlug, getPhotos, getStories, getEvents } from "@/lib/data";
+import { getEraBySlug, getEras, getPhotos, getStories, getEvents } from "@/lib/data";
 import { PhotoCard } from "@/components/archive/photo-card";
 import { StoryCard } from "@/components/stories/story-card";
 import { formatYear } from "@/lib/utils";
@@ -10,6 +10,11 @@ import { ArrowLeft, Calendar, Compass, Layers, BookOpen } from "lucide-react";
 
 interface EraDetailPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const eras = await getEras();
+  return eras.map((e) => ({ slug: e.slug }));
 }
 
 export async function generateMetadata({ params }: EraDetailPageProps): Promise<Metadata> {

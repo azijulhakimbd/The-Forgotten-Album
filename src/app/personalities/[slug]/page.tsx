@@ -2,13 +2,18 @@ import React from "react";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
-import { getPersonalityBySlug, getPhotos, getStories } from "@/lib/data";
+import { getPersonalityBySlug, getPersonalities, getPhotos, getStories } from "@/lib/data";
 import { PhotoCard } from "@/components/archive/photo-card";
 import { StoryCard } from "@/components/stories/story-card";
 import { ArrowLeft, User, Layers, BookOpen, Calendar, MapPin } from "lucide-react";
 
 interface PersonalityDetailPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const personalities = await getPersonalities();
+  return personalities.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PersonalityDetailPageProps): Promise<Metadata> {

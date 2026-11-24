@@ -23,6 +23,11 @@ interface StoryDetailPageProps {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateStaticParams() {
+  const { stories } = await getStories({ limit: 100 });
+  return stories.map((s) => ({ slug: s.slug }));
+}
+
 export async function generateMetadata({ params }: StoryDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
   const story = await getStoryBySlug(slug);

@@ -1,28 +1,10 @@
+import React, { Suspense } from "react";
 import type { Metadata } from "next";
-import { Playfair_Display, Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { SearchProvider } from "@/components/layout/search-dialog";
 import { PublicNavbar } from "@/components/layout/public-navbar";
 import { PublicFooter } from "@/components/layout/public-footer";
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: {
@@ -56,13 +38,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${geistSans.variable} ${jetbrainsMono.variable} dark`}
+      className="dark"
       suppressHydrationWarning
     >
       <body className="min-h-screen flex flex-col film-grain antialiased selection:bg-amber-500/30 selection:text-amber-300">
         <ThemeProvider>
           <SearchProvider>
-            <PublicNavbar />
+            <Suspense fallback={<div className="h-16 w-full border-b border-[var(--border-color)] bg-[var(--bg-primary)]" />}>
+              <PublicNavbar />
+            </Suspense>
             <main className="flex-1 w-full">{children}</main>
             <PublicFooter />
           </SearchProvider>

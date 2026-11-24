@@ -5,7 +5,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Save, CheckCircle2 } from "lucide-react";
 
-export default function AdminEditPhotoPage() {
+export default function AdminEditPhotoPage({
+  params,
+}: {
+  params?: Promise<{ id: string }>;
+}) {
   const router = useRouter();
   const [saved, setSaved] = useState(false);
 
