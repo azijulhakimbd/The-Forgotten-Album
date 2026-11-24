@@ -1,26 +1,93 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-primary: #F4EBDD;       /* Vintage Cream */
+    --bg-secondary: #E9DFC9;     /* Parchment */
+    --bg-card: #FAF5ED;          /* Light Card */
+    --text-primary: #12110F;     /* Archive Black */
+    --text-secondary: #796044;   /* Sepia Brown */
+    --text-muted: #8C8275;       /* Muted Brown */
+    --border-color: #D6C8AF;     /* Soft Paper Border */
+    --accent-gold: #B89255;      /* Antique Gold for light mode */
+    --accent-gold-hover: #9E7A3E;
+    --film-grain-opacity: 0.035;
+  }
+
+  .dark {
+    --bg-primary: #12110F;       /* Archive Black */
+    --bg-secondary: #1C1915;     /* Deep Charcoal */
+    --bg-card: #24201B;          /* Dark Card */
+    --text-primary: #F4EBDD;     /* Vintage Cream */
+    --text-secondary: #D6B77A;   /* Warm Gold */
+    --text-muted: #A8A095;       /* Muted Gray */
+    --border-color: #383228;     /* Aged Dark Border */
+    --accent-gold: #C5A46D;      /* Antique Gold */
+    --accent-gold-hover: #D6B77A;
+    --film-grain-opacity: 0.045;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom Scrollbar for Historical Archive Feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}
+
+/* Film Grain Texture Overlay */
+.film-grain {
+  position: relative;
+}
+.film-grain::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  opacity: var(--film-grain-opacity);
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+/* Historical Typography Display Styles */
+.font-display {
+  font-family: var(--font-playfair), Georgia, "Times New Roman", serif;
+}
+
+.font-mono-meta {
+  font-family: var(--font-mono), monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Gold Gradient Rule / Archive Divider */
+.archive-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-gold) 50%, transparent 100%);
+  opacity: 0.4;
+}
+
+.archive-border {
+  border-color: var(--border-color);
 }
