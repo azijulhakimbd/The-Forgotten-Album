@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Maximize2, Minimize2, ZoomIn, ZoomOut, RotateCcw, Download, Info } from "lucide-react";
+import { motion, AnimatePresence } from "@/components/ui/motion";
 
 interface PhotoViewerProps {
   imageUrl: string;
@@ -26,7 +27,12 @@ export function PhotoViewer({ imageUrl, title, attribution, sourceUrl }: PhotoVi
       }`}
     >
       {/* Interactive Controls Overlay */}
-      <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 p-1.5 rounded-lg bg-black/75 backdrop-blur-md border border-white/10 text-white/90">
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.2 }}
+        className="absolute top-4 right-4 z-20 flex items-center gap-1.5 p-1.5 rounded-lg bg-black/75 backdrop-blur-md border border-white/10 text-white/90"
+      >
         <button
           onClick={handleZoomIn}
           className="p-1.5 rounded hover:bg-white/15 text-white transition-colors"
@@ -75,36 +81,51 @@ export function PhotoViewer({ imageUrl, title, attribution, sourceUrl }: PhotoVi
         >
           {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
         </button>
-      </div>
+      </motion.div>
 
       {/* Main Archival Image Display */}
       <div className="w-full h-full flex items-center justify-center overflow-auto p-2">
-        <img
+        <motion.img
           src={imageUrl}
           alt={title}
-          style={{ transform: `scale(${zoomLevel})` }}
-          className="max-w-full max-h-full object-contain transition-transform duration-200 ease-out cursor-grab active:cursor-grabbing"
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: zoomLevel }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-full max-h-full object-contain cursor-grab active:cursor-grabbing"
           draggable={false}
         />
       </div>
 
-      {/* Provenance Banner (collapsible) */}
-      {showMetadata && (
-        <div className="absolute bottom-4 left-4 right-4 z-20 p-3.5 rounded-lg bg-black/85 backdrop-blur-md border border-white/15 text-xs text-stone-300 max-w-xl animate-fade-in font-mono">
-          <p className="font-semibold text-amber-400 mb-0.5">{title}</p>
-          <p className="truncate text-stone-400">{attribution}</p>
-        </div>
-      )}
+      {/* Provenance Banner (collapsible) with AnimatePresence */}
+      <AnimatePresence>
+        {showMetadata && (
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 15 }}
+            transition={{ duration: 0.25 }}
+            className="absolute bottom-4 left-4 right-4 z-20 p-3.5 rounded-lg bg-black/85 backdrop-blur-md border border-white/15 text-xs text-stone-300 max-w-xl font-mono"
+          >
+            <p className="font-semibold text-amber-400 mb-0.5">{title}</p>
+            <p className="truncate text-stone-400">{attribution}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Close button if in fullscreen mode */}
-      {isFullscreen && (
-        <button
-          onClick={() => setIsFullscreen(false)}
-          className="absolute top-4 left-4 z-20 px-3 py-1.5 rounded bg-black/80 text-white border border-white/20 text-xs font-mono hover:bg-white/20"
-        >
-          ESC / Close Fullscreen
-        </button>
-      )}
+      <AnimatePresence>
+        {isFullscreen && (
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsFullscreen(false)}
+            className="absolute top-4 left-4 z-20 px-3 py-1.5 rounded bg-black/80 text-white border border-white/20 text-xs font-mono hover:bg-white/20"
+          >
+            ESC / Close Fullscreen
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

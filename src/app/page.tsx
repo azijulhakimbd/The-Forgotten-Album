@@ -17,6 +17,7 @@ import { PersonalityCard } from "@/components/content/personality-card";
 import { CollectionCard } from "@/components/content/collection-card";
 import { NewsletterForm } from "@/components/forms/newsletter-form";
 import { generateOrganizationSchema } from "@/lib/seo/json-ld";
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 import {
   ArrowRight,
   Compass,
@@ -80,179 +81,193 @@ export default async function HomePage() {
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 pt-12 pb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-300 text-xs font-mono uppercase tracking-widest backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Digital Historical Archive & Curatorial Magazine</span>
-          </div>
+          <FadeIn delay={0.1} direction="down">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-300 text-xs font-mono uppercase tracking-widest backdrop-blur-md">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Digital Historical Archive & Curatorial Magazine</span>
+            </div>
+          </FadeIn>
 
-          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.08] max-w-4xl mx-auto">
-            History is never truly <span className="text-amber-400 italic">forgotten.</span>
-          </h1>
+          <FadeIn delay={0.25} direction="up" distance={30}>
+            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.08] max-w-4xl mx-auto">
+              History is never truly <span className="text-amber-400 italic">forgotten.</span>
+            </h1>
+          </FadeIn>
 
-          <p className="text-base sm:text-xl text-stone-300 max-w-2xl mx-auto font-light leading-relaxed">
-            Explore extraordinary photographs, untold stories, and moments that shaped our world. A museum archive preserved for the future.
-          </p>
+          <FadeIn delay={0.4} direction="up">
+            <p className="text-base sm:text-xl text-stone-300 max-w-2xl mx-auto font-light leading-relaxed">
+              Explore extraordinary photographs, untold stories, and moments that shaped our world. A museum archive preserved for the future.
+            </p>
+          </FadeIn>
 
           {/* Call to Actions */}
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/archive"
-              className="w-full sm:w-auto px-8 py-3.5 rounded bg-amber-600 hover:bg-amber-500 text-stone-950 font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-amber-500/20 flex items-center justify-center gap-2"
-            >
-              <span>Explore the Archive</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+          <FadeIn delay={0.55} direction="up">
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/archive"
+                className="w-full sm:w-auto px-8 py-3.5 rounded bg-amber-600 hover:bg-amber-500 text-stone-950 font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-amber-500/20 flex items-center justify-center gap-2"
+              >
+                <span>Explore the Archive</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
 
-            <Link
-              href="/stories"
-              className="w-full sm:w-auto px-8 py-3.5 rounded border border-amber-400/40 hover:border-amber-400 bg-black/40 hover:bg-black/60 text-white font-medium text-sm transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-2"
-            >
-              <BookOpen className="w-4 h-4 text-amber-400" />
-              <span>Discover Stories</span>
-            </Link>
-          </div>
+              <Link
+                href="/stories"
+                className="w-full sm:w-auto px-8 py-3.5 rounded border border-amber-400/40 hover:border-amber-400 bg-black/40 hover:bg-black/60 text-white font-medium text-sm transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-2"
+              >
+                <BookOpen className="w-4 h-4 text-amber-400" />
+                <span>Discover Stories</span>
+              </Link>
+            </div>
+          </FadeIn>
 
           {/* Quick Museum Stats Counter */}
-          <div className="pt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto border-t border-white/10 text-stone-300 text-xs font-mono">
-            <div>
-              <p className="text-xl sm:text-2xl font-bold text-amber-400 font-display">1838–2000</p>
-              <p className="text-stone-400">Chronological Span</p>
+          <FadeIn delay={0.7} direction="up">
+            <div className="pt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto border-t border-white/10 text-stone-300 text-xs font-mono">
+              <div>
+                <p className="text-xl sm:text-2xl font-bold text-amber-400 font-display">1838–2000</p>
+                <p className="text-stone-400">Chronological Span</p>
+              </div>
+              <div>
+                <p className="text-xl sm:text-2xl font-bold text-amber-400 font-display">12</p>
+                <p className="text-stone-400">Curated Categories</p>
+              </div>
+              <div>
+                <p className="text-xl sm:text-2xl font-bold text-amber-400 font-display">10</p>
+                <p className="text-stone-400">Historical Eras</p>
+              </div>
+              <div>
+                <p className="text-xl sm:text-2xl font-bold text-amber-400 font-display">100%</p>
+                <p className="text-stone-400">Public Domain Verified</p>
+              </div>
             </div>
-            <div>
-              <p className="text-xl sm:text-2xl font-bold text-amber-400 font-display">12</p>
-              <p className="text-stone-400">Curated Categories</p>
-            </div>
-            <div>
-              <p className="text-xl sm:text-2xl font-bold text-amber-400 font-display">10</p>
-              <p className="text-stone-400">Historical Eras</p>
-            </div>
-            <div>
-              <p className="text-xl sm:text-2xl font-bold text-amber-400 font-display">100%</p>
-              <p className="text-stone-400">Public Domain Verified</p>
-            </div>
-          </div>
+          </FadeIn>
         </div>
       </section>
 
       {/* 5C. Featured Photograph of the Era */}
       {featuredPhoto && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="flex items-center justify-between mb-8 pb-3 border-b border-[var(--border-color)]">
-            <div>
-              <span className="text-xs font-mono uppercase tracking-widest text-amber-600 dark:text-amber-400 font-semibold">
-                Curatorial Showcase
-              </span>
-              <h2 className="font-display text-2xl sm:text-3xl font-bold mt-1">
-                Featured Historical Photograph
-              </h2>
-            </div>
-            <Link
-              href="/archive"
-              className="text-xs font-mono text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1"
-            >
-              <span>View all archives</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] p-6 sm:p-8 shadow-xl">
-            <div className="lg:col-span-7 relative aspect-[4/3] rounded-xl overflow-hidden bg-black/40 group">
-              <img
-                src={featuredPhoto.imageUrl}
-                alt={featuredPhoto.title}
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              <div className="absolute top-3 left-3 px-3 py-1 rounded bg-black/75 backdrop-blur-sm text-xs font-mono text-amber-300 border border-amber-500/20">
-                {featuredPhoto.datePhotographed}
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 space-y-4">
-              <div className="flex flex-wrap gap-2 text-xs font-mono text-[var(--text-muted)]">
-                <span className="flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5 text-amber-500" />
-                  {featuredPhoto.location}
+          <FadeIn distance={25}>
+            <div className="flex items-center justify-between mb-8 pb-3 border-b border-[var(--border-color)]">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-widest text-amber-600 dark:text-amber-400 font-semibold">
+                  Curatorial Showcase
                 </span>
-                <span>•</span>
-                <span className="flex items-center gap-1">
-                  <Camera className="w-3.5 h-3.5 text-amber-500" />
-                  By {featuredPhoto.photographer}
-                </span>
+                <h2 className="font-display text-2xl sm:text-3xl font-bold mt-1">
+                  Featured Historical Photograph
+                </h2>
+              </div>
+              <Link
+                href="/archive"
+                className="text-xs font-mono text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1"
+              >
+                <span>View all archives</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] p-6 sm:p-8 shadow-xl">
+              <div className="lg:col-span-7 relative aspect-[4/3] rounded-xl overflow-hidden bg-black/40 group">
+                <img
+                  src={featuredPhoto.imageUrl}
+                  alt={featuredPhoto.title}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+                <div className="absolute top-3 left-3 px-3 py-1 rounded bg-black/75 backdrop-blur-sm text-xs font-mono text-amber-300 border border-amber-500/20">
+                  {featuredPhoto.datePhotographed}
+                </div>
               </div>
 
-              <h3 className="font-display text-2xl sm:text-3xl font-bold text-[var(--text-primary)] leading-tight">
-                {featuredPhoto.title}
-              </h3>
+              <div className="lg:col-span-5 space-y-4">
+                <div className="flex flex-wrap gap-2 text-xs font-mono text-[var(--text-muted)]">
+                  <span className="flex items-center gap-1">
+                    <MapPin className="w-3.5 h-3.5 text-amber-500" />
+                    {featuredPhoto.location}
+                  </span>
+                  <span>•</span>
+                  <span className="flex items-center gap-1">
+                    <Camera className="w-3.5 h-3.5 text-amber-500" />
+                    By {featuredPhoto.photographer}
+                  </span>
+                </div>
 
-              <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                {featuredPhoto.caption}
-              </p>
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-[var(--text-primary)] leading-tight">
+                  {featuredPhoto.title}
+                </h3>
 
-              <div className="p-3.5 rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] text-xs text-[var(--text-muted)] space-y-1 font-mono">
-                <p>
-                  <strong className="text-[var(--text-primary)]">Source:</strong> {featuredPhoto.sourceName}
+                <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+                  {featuredPhoto.caption}
                 </p>
-                <p>
-                  <strong className="text-[var(--text-primary)]">License:</strong> {featuredPhoto.license}
-                </p>
-              </div>
 
-              <div className="pt-2 flex items-center gap-3">
-                <Link
-                  href={`/archive/${featuredPhoto.slug}`}
-                  className="px-6 py-2.5 rounded bg-amber-600 hover:bg-amber-500 text-stone-950 font-semibold text-xs transition-colors flex items-center gap-2"
-                >
-                  <span>Examine Photograph</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-                <Link
-                  href={`/archive`}
-                  className="px-5 py-2.5 rounded border border-[var(--border-color)] text-xs font-mono hover:border-amber-500 transition-colors"
-                >
-                  Browse Gallery
-                </Link>
+                <div className="p-3.5 rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] text-xs text-[var(--text-muted)] space-y-1 font-mono">
+                  <p>
+                    <strong className="text-[var(--text-primary)]">Source:</strong> {featuredPhoto.sourceName}
+                  </p>
+                  <p>
+                    <strong className="text-[var(--text-primary)]">License:</strong> {featuredPhoto.license}
+                  </p>
+                </div>
+
+                <div className="pt-2 flex items-center gap-3">
+                  <Link
+                    href={`/archive/${featuredPhoto.slug}`}
+                    className="px-6 py-2.5 rounded bg-amber-600 hover:bg-amber-500 text-stone-950 font-semibold text-xs transition-colors flex items-center gap-2"
+                  >
+                    <span>Examine Photograph</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                  <Link
+                    href={`/archive`}
+                    className="px-5 py-2.5 rounded border border-[var(--border-color)] text-xs font-mono hover:border-amber-500 transition-colors"
+                  >
+                    Browse Gallery
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          </FadeIn>
         </section>
       )}
 
       {/* 5D. Today's Historical Moment */}
       {todaysMoment && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="relative rounded-2xl border border-amber-600/30 bg-gradient-to-r from-amber-950/20 via-stone-900/30 to-amber-950/20 p-6 sm:p-10 overflow-hidden shadow-lg">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-              <div className="md:col-span-8 space-y-3">
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-amber-500/20 text-amber-600 dark:text-amber-400 text-xs font-mono uppercase tracking-wider font-semibold">
-                  <Calendar className="w-3.5 h-3.5" />
-                  <span>On This Date In History • {todaysMoment.eventDate}</span>
+          <FadeIn distance={25}>
+            <div className="relative rounded-2xl border border-amber-600/30 bg-gradient-to-r from-amber-950/20 via-stone-900/30 to-amber-950/20 p-6 sm:p-10 overflow-hidden shadow-lg">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <div className="md:col-span-8 space-y-3">
+                  <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-amber-500/20 text-amber-600 dark:text-amber-400 text-xs font-mono uppercase tracking-wider font-semibold">
+                    <Calendar className="w-3.5 h-3.5" />
+                    <span>On This Date In History • {todaysMoment.eventDate}</span>
+                  </div>
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-[var(--text-primary)] leading-tight">
+                    {todaysMoment.title}
+                  </h3>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed max-w-2xl">
+                    {todaysMoment.summary}
+                  </p>
+                  <div className="pt-2">
+                    <Link
+                      href={`/timeline?event=${todaysMoment.slug}`}
+                      className="inline-flex items-center gap-2 text-xs font-mono text-amber-600 dark:text-amber-400 font-semibold hover:underline"
+                    >
+                      <span>Read complete historical event record</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
                 </div>
-                <h3 className="font-display text-2xl sm:text-3xl font-bold text-[var(--text-primary)] leading-tight">
-                  {todaysMoment.title}
-                </h3>
-                <p className="text-sm text-[var(--text-muted)] leading-relaxed max-w-2xl">
-                  {todaysMoment.summary}
-                </p>
-                <div className="pt-2">
-                  <Link
-                    href={`/timeline?event=${todaysMoment.slug}`}
-                    className="inline-flex items-center gap-2 text-xs font-mono text-amber-600 dark:text-amber-400 font-semibold hover:underline"
-                  >
-                    <span>Read complete historical event record</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </div>
 
-              <div className="md:col-span-4 aspect-[4/3] rounded-xl overflow-hidden border border-[var(--border-color)] bg-black/40">
-                <img
-                  src={todaysMoment.coverImage}
-                  alt={todaysMoment.title}
-                  className="w-full h-full object-cover filter grayscale-[20%]"
-                />
+                <div className="md:col-span-4 aspect-[4/3] rounded-xl overflow-hidden border border-[var(--border-color)] bg-black/40">
+                  <img
+                    src={todaysMoment.coverImage}
+                    alt={todaysMoment.title}
+                    className="w-full h-full object-cover filter grayscale-[20%]"
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          </FadeIn>
         </section>
       )}
 
@@ -276,11 +291,13 @@ export default async function HomePage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.slice(0, 6).map((cat) => (
-            <CategoryCard key={cat.id} category={cat} />
+            <StaggerItem key={cat.id}>
+              <CategoryCard category={cat} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </section>
 
       {/* 5F. Featured Stories (Historical Editorial System) */}
@@ -304,13 +321,19 @@ export default async function HomePage() {
         </div>
 
         <div className="space-y-8">
-          {leadStory && <StoryCard story={leadStory} featured={true} />}
+          {leadStory && (
+            <FadeIn distance={20}>
+              <StoryCard story={leadStory} featured={true} />
+            </FadeIn>
+          )}
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {recentStories.map((story) => (
-              <StoryCard key={story.id} story={story} />
+              <StaggerItem key={story.id}>
+                <StoryCard story={story} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -334,11 +357,13 @@ export default async function HomePage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {eras.slice(0, 8).map((era) => (
-            <EraCard key={era.id} era={era} />
+            <StaggerItem key={era.id}>
+              <EraCard era={era} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </section>
 
       {/* 5H. Historical Personalities */}
@@ -361,11 +386,13 @@ export default async function HomePage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+        <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
           {personalities.slice(0, 6).map((personality) => (
-            <PersonalityCard key={personality.id} personality={personality} />
+            <StaggerItem key={personality.id}>
+              <PersonalityCard personality={personality} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </section>
 
       {/* 5I. Photo Collections */}
@@ -388,35 +415,39 @@ export default async function HomePage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {collections.map((col) => (
-            <CollectionCard key={col.id} collection={col} />
+            <StaggerItem key={col.id}>
+              <CollectionCard collection={col} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </section>
 
       {/* 5J. Elegant Newsletter Subscription Section */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
-        <div className="rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] p-8 sm:p-12 space-y-6 shadow-2xl relative overflow-hidden">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full border border-amber-600/40 bg-amber-500/10 text-amber-600 dark:text-amber-400 mx-auto">
-            <History className="w-6 h-6" />
-          </div>
+        <FadeIn distance={20}>
+          <div className="rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] p-8 sm:p-12 space-y-6 shadow-2xl relative overflow-hidden">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full border border-amber-600/40 bg-amber-500/10 text-amber-600 dark:text-amber-400 mx-auto">
+              <History className="w-6 h-6" />
+            </div>
 
-          <div className="space-y-2">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-[var(--text-primary)]">
-              History deserves to be remembered.
-            </h2>
-            <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-lg mx-auto">
-              Receive remarkable photographs and forgotten stories from the past delivered directly to your inbox every Sunday.
+            <div className="space-y-2">
+              <h2 className="font-display text-3xl sm:text-4xl font-bold text-[var(--text-primary)]">
+                History deserves to be remembered.
+              </h2>
+              <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-lg mx-auto">
+                Receive remarkable photographs and forgotten stories from the past delivered directly to your inbox every Sunday.
+              </p>
+            </div>
+
+            <NewsletterForm />
+
+            <p className="text-[11px] text-[var(--text-muted)] font-mono">
+              No spam. Strictly public domain archives & verified historical narratives. Unsubscribe anytime.
             </p>
           </div>
-
-          <NewsletterForm />
-
-          <p className="text-[11px] text-[var(--text-muted)] font-mono">
-            No spam. Strictly public domain archives & verified historical narratives. Unsubscribe anytime.
-          </p>
-        </div>
+        </FadeIn>
       </section>
     </div>
   );

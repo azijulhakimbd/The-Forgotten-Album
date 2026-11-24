@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { Search, X, Calendar, MapPin, BookOpen, User, Building, Compass, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { searchArchive, GlobalSearchResult } from "@/lib/data";
+import { motion, AnimatePresence } from "@/components/ui/motion";
 
 interface SearchContextType {
   isOpen: boolean;
@@ -88,12 +89,24 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
   return (
     <SearchContext.Provider value={{ isOpen, openSearch, closeSearch }}>
       {children}
-      {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/70 backdrop-blur-sm animate-fade-in">
-          <div
-            className="w-full max-w-2xl rounded-xl border border-amber-900/40 bg-[var(--bg-card)] shadow-2xl overflow-hidden transition-all text-[var(--text-primary)]"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/70 backdrop-blur-sm"
+            onClick={closeSearch}
           >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: -15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -15 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full max-w-2xl rounded-xl border border-amber-900/40 bg-[var(--bg-card)] shadow-2xl overflow-hidden transition-all text-[var(--text-primary)]"
+              onClick={(e) => e.stopPropagation()}
+            >
             {/* Search Input Bar */}
             <div className="flex items-center px-4 py-3.5 border-b border-[var(--border-color)]">
               <Search className="w-5 h-5 text-amber-500/80 mr-3 flex-shrink-0" />
@@ -196,9 +209,10 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
                 </div>
               )}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
-    </SearchContext.Provider>
-  );
+    </AnimatePresence>
+  </SearchContext.Provider>
+);
 }

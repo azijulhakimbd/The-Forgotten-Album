@@ -35,11 +35,12 @@ export function PublicFooter() {
             <p className="text-sm text-[var(--text-muted)] leading-relaxed max-w-sm">
               Where forgotten memories come alive. Dedicated to preserving world history, uncovering lost narratives, and presenting verified historical photographs in a digital museum environment.
             </p>
-            <div className="pt-2">
+            <div className="pt-2 flex flex-wrap items-center gap-3">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border-color)] text-xs text-[var(--text-muted)] bg-[var(--bg-card)]">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 <span>Archive Curated Daily • Public Domain Preserved</span>
               </div>
+              <PwaInstallButton />
             </div>
           </div>
 

@@ -15,6 +15,7 @@ import { PhotoCard } from "@/components/archive/photo-card";
 import { StoryCard } from "@/components/stories/story-card";
 import { ShareButtons } from "@/components/archive/share-buttons";
 import { generatePhotoSchema } from "@/lib/seo/json-ld";
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 import {
   Calendar,
   MapPin,
@@ -115,122 +116,126 @@ export default async function PhotoDetailPage({ params }: PhotoDetailPageProps) 
       </div>
 
       {/* Full-width Archival Image Viewer with Zoom & Fullscreen */}
-      <section className="space-y-4">
-        <PhotoViewer
-          imageUrl={photo.imageUrl}
-          title={photo.title}
-          attribution={photo.attribution}
-          sourceUrl={photo.sourceUrl}
-        />
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs text-[var(--text-muted)] font-mono gap-2 px-1">
-          <span>Click fullscreen icon or zoom controls for high-resolution inspection</span>
-          <div className="flex items-center gap-1.5">
-            <Eye className="w-3.5 h-3.5" />
-            <span>{photo.viewCount.toLocaleString()} Archival Views</span>
+      <FadeIn distance={20}>
+        <section className="space-y-4">
+          <PhotoViewer
+            imageUrl={photo.imageUrl}
+            title={photo.title}
+            attribution={photo.attribution}
+            sourceUrl={photo.sourceUrl}
+          />
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs text-[var(--text-muted)] font-mono gap-2 px-1">
+            <span>Click fullscreen icon or zoom controls for high-resolution inspection</span>
+            <div className="flex items-center gap-1.5">
+              <Eye className="w-3.5 h-3.5" />
+              <span>{photo.viewCount.toLocaleString()} Archival Views</span>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </FadeIn>
 
       {/* Main Details and Provenance Metadata */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        {/* Left Column: Photograph Narrative and Captions */}
-        <div className="lg:col-span-8 space-y-6">
-          <div className="space-y-3">
-            <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-amber-600 dark:text-amber-400">
-              <span className="flex items-center gap-1 bg-amber-500/10 px-2.5 py-1 rounded">
-                <Calendar className="w-3.5 h-3.5" />
-                {photo.datePhotographed} ({photo.datePrecision})
-              </span>
-              <span className="flex items-center gap-1 bg-amber-500/10 px-2.5 py-1 rounded">
-                <MapPin className="w-3.5 h-3.5" />
-                {photo.location}, {photo.country}
-              </span>
-            </div>
-
-            <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[var(--text-primary)] leading-tight">
-              {photo.title}
-            </h1>
-          </div>
-
-          <div className="prose prose-invert max-w-none text-base text-[var(--text-primary)] leading-relaxed space-y-4">
-            <p className="text-lg font-light italic text-[var(--text-muted)] border-l-2 border-amber-500 pl-4">
-              {photo.shortDescription}
-            </p>
-            <p className="leading-relaxed">
-              {photo.caption}
-            </p>
-          </div>
-
-          {/* Social Share Controls */}
-          <div className="pt-6 border-t border-[var(--border-color)]">
-            <ShareButtons title={photo.title} slug={photo.slug} />
-          </div>
-
-          {/* Tags */}
-          {photo.tags && photo.tags.length > 0 && (
-            <div className="pt-2 flex flex-wrap gap-2 items-center">
-              <span className="text-xs font-mono text-[var(--text-muted)] uppercase">Tags:</span>
-              {photo.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2.5 py-0.5 rounded-full border border-[var(--border-color)] text-xs text-[var(--text-muted)]"
-                >
-                  #{tag}
+      <FadeIn distance={25} delay={0.1}>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          {/* Left Column: Photograph Narrative and Captions */}
+          <div className="lg:col-span-8 space-y-6">
+            <div className="space-y-3">
+              <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-amber-600 dark:text-amber-400">
+                <span className="flex items-center gap-1 bg-amber-500/10 px-2.5 py-1 rounded">
+                  <Calendar className="w-3.5 h-3.5" />
+                  {photo.datePhotographed} ({photo.datePrecision})
                 </span>
-              ))}
+                <span className="flex items-center gap-1 bg-amber-500/10 px-2.5 py-1 rounded">
+                  <MapPin className="w-3.5 h-3.5" />
+                  {photo.location}, {photo.country}
+                </span>
+              </div>
+
+              <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[var(--text-primary)] leading-tight">
+                {photo.title}
+              </h1>
             </div>
-          )}
-        </div>
 
-        {/* Right Column: Historical Provenance & Archival Registry */}
-        <div className="lg:col-span-4 space-y-6">
-          <div className="rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] p-6 space-y-4 shadow-sm">
-            <h3 className="font-mono text-xs uppercase tracking-wider text-amber-600 dark:text-amber-400 font-semibold flex items-center gap-1.5 pb-2 border-b border-[var(--border-color)]">
-              <Shield className="w-4 h-4" />
-              <span>Provenance & Attribution</span>
-            </h3>
+            <div className="prose prose-invert max-w-none text-base text-[var(--text-primary)] leading-relaxed space-y-4">
+              <p className="text-lg font-light italic text-[var(--text-muted)] border-l-2 border-amber-500 pl-4">
+                {photo.shortDescription}
+              </p>
+              <p className="leading-relaxed">
+                {photo.caption}
+              </p>
+            </div>
 
-            <div className="space-y-3 text-xs font-mono">
-              <div>
-                <p className="text-[var(--text-muted)] uppercase text-[10px]">Photographer / Studio</p>
-                <p className="font-medium text-[var(--text-primary)] mt-0.5">{photo.photographer}</p>
+            {/* Social Share Controls */}
+            <div className="pt-6 border-t border-[var(--border-color)]">
+              <ShareButtons title={photo.title} slug={photo.slug} />
+            </div>
+
+            {/* Tags */}
+            {photo.tags && photo.tags.length > 0 && (
+              <div className="pt-2 flex flex-wrap gap-2 items-center">
+                <span className="text-xs font-mono text-[var(--text-muted)] uppercase">Tags:</span>
+                {photo.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2.5 py-0.5 rounded-full border border-[var(--border-color)] text-xs text-[var(--text-muted)]"
+                  >
+                    #{tag}
+                  </span>
+                ))}
               </div>
+            )}
+          </div>
 
-              <div>
-                <p className="text-[var(--text-muted)] uppercase text-[10px]">Archival Repository</p>
-                <p className="font-medium text-[var(--text-primary)] mt-0.5">{photo.sourceName}</p>
-              </div>
+          {/* Right Column: Historical Provenance & Archival Registry */}
+          <div className="lg:col-span-4 space-y-6">
+            <div className="rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] p-6 space-y-4 shadow-sm">
+              <h3 className="font-mono text-xs uppercase tracking-wider text-amber-600 dark:text-amber-400 font-semibold flex items-center gap-1.5 pb-2 border-b border-[var(--border-color)]">
+                <Shield className="w-4 h-4" />
+                <span>Provenance & Attribution</span>
+              </h3>
 
-              <div>
-                <p className="text-[var(--text-muted)] uppercase text-[10px]">License & Copyright</p>
-                <p className="font-medium text-[var(--text-primary)] mt-0.5 text-emerald-500">{photo.license}</p>
-                {photo.copyrightNotes && (
-                  <p className="text-[11px] text-[var(--text-muted)] mt-0.5">{photo.copyrightNotes}</p>
-                )}
-              </div>
+              <div className="space-y-3 text-xs font-mono">
+                <div>
+                  <p className="text-[var(--text-muted)] uppercase text-[10px]">Photographer / Studio</p>
+                  <p className="font-medium text-[var(--text-primary)] mt-0.5">{photo.photographer}</p>
+                </div>
 
-              <div>
-                <p className="text-[var(--text-muted)] uppercase text-[10px]">Attribution Record</p>
-                <p className="font-medium text-[var(--text-primary)] mt-0.5 text-[11px] leading-relaxed">
-                  {photo.attribution}
-                </p>
-              </div>
+                <div>
+                  <p className="text-[var(--text-muted)] uppercase text-[10px]">Archival Repository</p>
+                  <p className="font-medium text-[var(--text-primary)] mt-0.5">{photo.sourceName}</p>
+                </div>
 
-              <div className="pt-2">
-                <a
-                  href={photo.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-amber-600/15 hover:bg-amber-600/25 text-amber-700 dark:text-amber-300 text-xs w-full justify-center transition-colors border border-amber-600/30"
-                >
-                  <span>Verify with Source Archive</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
+                <div>
+                  <p className="text-[var(--text-muted)] uppercase text-[10px]">License & Copyright</p>
+                  <p className="font-medium text-[var(--text-primary)] mt-0.5 text-emerald-500">{photo.license}</p>
+                  {photo.copyrightNotes && (
+                    <p className="text-[11px] text-[var(--text-muted)] mt-0.5">{photo.copyrightNotes}</p>
+                  )}
+                </div>
+
+                <div>
+                  <p className="text-[var(--text-muted)] uppercase text-[10px]">Attribution Record</p>
+                  <p className="font-medium text-[var(--text-primary)] mt-0.5 text-[11px] leading-relaxed">
+                    {photo.attribution}
+                  </p>
+                </div>
+
+                <div className="pt-2">
+                  <a
+                    href={photo.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-amber-600/15 hover:bg-amber-600/25 text-amber-700 dark:text-amber-300 text-xs w-full justify-center transition-colors border border-amber-600/30"
+                  >
+                    <span>Verify with Source Archive</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </FadeIn>
 
       {/* Related Historical Stories */}
       {relatedStories.length > 0 && (
@@ -239,11 +244,13 @@ export default async function PhotoDetailPage({ params }: PhotoDetailPageProps) 
             <BookOpen className="w-4 h-4 text-amber-500" />
             <h3 className="font-display text-xl font-bold">Related Editorial Essays</h3>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {relatedStories.map((story) => (
-              <StoryCard key={story.id} story={story} />
+              <StaggerItem key={story.id}>
+                <StoryCard story={story} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </section>
       )}
 
@@ -259,11 +266,13 @@ export default async function PhotoDetailPage({ params }: PhotoDetailPageProps) 
               Explore All
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {relatedPhotos.map((p) => (
-              <PhotoCard key={p.id} photo={p} />
+              <StaggerItem key={p.id}>
+                <PhotoCard photo={p} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </section>
       )}
     </div>

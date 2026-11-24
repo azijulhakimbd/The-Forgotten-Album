@@ -7,6 +7,7 @@ import { StoryCard } from "@/components/stories/story-card";
 import { ShareButtons } from "@/components/archive/share-buttons";
 import { formatDate } from "@/lib/utils";
 import { generateStorySchema } from "@/lib/seo/json-ld";
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 import {
   Calendar,
   Clock,
@@ -102,47 +103,51 @@ export default async function StoryDetailPage({ params }: StoryDetailPageProps) 
       </div>
 
       {/* Article Header & Title */}
-      <header className="space-y-6 text-center max-w-3xl mx-auto">
-        <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-mono text-amber-600 dark:text-amber-400">
-          <span className="flex items-center gap-1">
-            <Calendar className="w-3.5 h-3.5" />
-            {formatDate(story.publishDate)}
-          </span>
-          <span>•</span>
-          <span className="flex items-center gap-1">
-            <Clock className="w-3.5 h-3.5" />
-            {story.readingTimeMinutes} minute read
-          </span>
-          <span>•</span>
-          <span className="flex items-center gap-1">
-            <User className="w-3.5 h-3.5" />
-            By {story.authorName || "Curatorial Staff"}
-          </span>
-        </div>
+      <FadeIn distance={20}>
+        <header className="space-y-6 text-center max-w-3xl mx-auto">
+          <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-mono text-amber-600 dark:text-amber-400">
+            <span className="flex items-center gap-1">
+              <Calendar className="w-3.5 h-3.5" />
+              {formatDate(story.publishDate)}
+            </span>
+            <span>•</span>
+            <span className="flex items-center gap-1">
+              <Clock className="w-3.5 h-3.5" />
+              {story.readingTimeMinutes} minute read
+            </span>
+            <span>•</span>
+            <span className="flex items-center gap-1">
+              <User className="w-3.5 h-3.5" />
+              By {story.authorName || "Curatorial Staff"}
+            </span>
+          </div>
 
-        <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] leading-[1.12]">
-          {story.title}
-        </h1>
+          <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] leading-[1.12]">
+            {story.title}
+          </h1>
 
-        <p className="text-lg sm:text-xl font-light text-[var(--text-muted)] italic leading-relaxed">
-          {story.subtitle}
-        </p>
+          <p className="text-lg sm:text-xl font-light text-[var(--text-muted)] italic leading-relaxed">
+            {story.subtitle}
+          </p>
 
-        {/* Social Share Bar */}
-        <div className="pt-2 flex justify-center">
-          <ShareButtons title={story.title} slug={story.slug} />
-        </div>
-      </header>
+          {/* Social Share Bar */}
+          <div className="pt-2 flex justify-center">
+            <ShareButtons title={story.title} slug={story.slug} />
+          </div>
+        </header>
+      </FadeIn>
 
       {/* Full-width Cover Historical Photograph */}
-      <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-[var(--border-color)] bg-black/40 shadow-2xl">
-        <img
-          src={story.coverImage}
-          alt={story.title}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-      </div>
+      <FadeIn distance={25} delay={0.1}>
+        <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-[var(--border-color)] bg-black/40 shadow-2xl">
+          <img
+            src={story.coverImage}
+            alt={story.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        </div>
+      </FadeIn>
 
       {/* Article Body Layout: Main Article + Table of Contents */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -287,11 +292,13 @@ export default async function StoryDetailPage({ params }: StoryDetailPageProps) 
               View All
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {relatedStories.map((s) => (
-              <StoryCard key={s.id} story={s} />
+              <StaggerItem key={s.id}>
+                <StoryCard story={s} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </section>
       )}
     </article>

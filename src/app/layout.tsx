@@ -16,6 +16,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://theforgottenalbum.org"),
   title: {
     default: "The Forgotten Album — Where Forgotten Memories Come Alive",
     template: "%s | The Forgotten Album",

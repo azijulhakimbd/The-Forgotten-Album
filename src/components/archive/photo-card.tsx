@@ -1,11 +1,18 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { Photo } from "@/types";
-import { MapPin, Calendar, Eye, Bookmark } from "lucide-react";
+import { MapPin, Eye } from "lucide-react";
+import { motion } from "@/components/ui/motion";
 
 export function PhotoCard({ photo }: { photo: Photo }) {
   return (
-    <article className="group relative flex flex-col rounded-lg border border-[var(--border-color)] bg-[var(--bg-card)] overflow-hidden transition-all duration-300 hover:border-amber-600/50 hover:shadow-xl">
+    <motion.article
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      className="group relative flex flex-col rounded-lg border border-[var(--border-color)] bg-[var(--bg-card)] overflow-hidden transition-colors duration-300 hover:border-amber-600/50 hover:shadow-xl"
+    >
       {/* Photograph Image */}
       <Link href={`/archive/${photo.slug}`} className="relative aspect-[4/3] w-full overflow-hidden bg-black/40 block">
         <img
@@ -58,6 +65,6 @@ export function PhotoCard({ photo }: { photo: Photo }) {
           </div>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }

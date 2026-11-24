@@ -4,6 +4,7 @@ import { getPhotos, getCategories, getEras } from "@/lib/data";
 import { PhotoCard } from "@/components/archive/photo-card";
 import { PhotoFilters } from "@/components/archive/photo-filters";
 import { Landmark, Compass } from "lucide-react";
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 
 export const metadata: Metadata = {
   title: "Historical Photo Archive",
@@ -45,18 +46,20 @@ export default async function ArchivePage({ searchParams }: ArchivePageProps) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       {/* Header Banner */}
-      <div className="space-y-3 pb-6 border-b border-[var(--border-color)]">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-600/30 bg-amber-500/10 text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400">
-          <Landmark className="w-3.5 h-3.5" />
-          <span>Curated Photography Archive</span>
+      <FadeIn distance={20}>
+        <div className="space-y-3 pb-6 border-b border-[var(--border-color)]">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-600/30 bg-amber-500/10 text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400">
+            <Landmark className="w-3.5 h-3.5" />
+            <span>Curated Photography Archive</span>
+          </div>
+          <h1 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-[var(--text-primary)]">
+            The Historical Archive
+          </h1>
+          <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-2xl leading-relaxed">
+            Browse authentic photographs documenting human triumph, scientific awakening, lost cities, and everyday life across two centuries.
+          </p>
         </div>
-        <h1 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-[var(--text-primary)]">
-          The Historical Archive
-        </h1>
-        <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-2xl leading-relaxed">
-          Browse authentic photographs documenting human triumph, scientific awakening, lost cities, and everyday life across two centuries.
-        </p>
-      </div>
+      </FadeIn>
 
       {/* Filter and Search Controls */}
       <React.Suspense fallback={<div className="h-16 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] animate-pulse" />}>
@@ -81,11 +84,13 @@ export default async function ArchivePage({ searchParams }: ArchivePageProps) {
             <span>Page {page} of {totalPages}</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {photos.map((photo) => (
-              <PhotoCard key={photo.id} photo={photo} />
+              <StaggerItem key={photo.id}>
+                <PhotoCard photo={photo} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
 
           {/* Pagination */}
           {totalPages > 1 && (
